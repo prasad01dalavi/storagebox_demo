@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>LMTech Rekognition</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      left: 150px;
+      top:-30px;
+      width: 55px;
+      height: 28px;
+    }
+
+    .switch input {display:none;}
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+
+  </style>
+</head>
+
+<body>
+<div class="container">
+    <br />
+    <div class="row">
+        <div class="col-sm-6">
+         <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3><b>LMTech Insight</b></h3>
+            </div>
+            <div class="panel-body">
+                    <img src="http://192.168.0.102:8080/video" alt="Camera Footage" width="500" height="377">
+                    <br /><hr />
+
+                    <p>
+                        <h4><b>Visual Intelligence System:</b></h4>
+                        <h4>It's a system to generate an insight or warning alert by analyzing real time video through camera.</h5>
+                        <br />
+                        <h4><b>Under Development:</b></h4>
+                        <h4>Complete system to give alert or predict the incidences for various purposes.</h4>
+                        <br />
+                        <footer>&copy; 2018 Living Mind Technologies</footer>
+                    </p>
+            </div>
+              </div>
+        </div>
+
+        <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12">
+                          <div class="panel panel-success">
+                            <div class="panel-heading" style="background-color: green; color: white">
+                              <h3><b>Results</b></h3>
+                            </div>
+                            <div class="panel-body">
+                              <table>
+                                  <tr><th>PREDICTED CONCEPT</th><th>CONFIDENCE(%)</th></tr>
+                                  <tr><td id="concept1"></td><td id="probability1"></td></tr>
+                                  <tr><td id="concept2"></td><td id="probability2"></td></tr>
+                                  <tr><td id="concept3"></td><td id="probability3"></td></tr>
+                                  <tr><td id="concept4"></td><td id="probability4"></td></tr>
+                                  <tr><td id="concept5"></td><td id="probability5"></td></tr>
+                              </table>
+
+                              <h4><b>Alert Activation:</b></h4>
+
+                              <label class="switch">
+                                  <input type="checkbox" id="alert_switch">
+                                  <span class="slider round"></span>
+                              </label>
+
+                              <script>
+
+                              function getAlertValue()
+                              {
+                                   var isChecked = document.getElementById("alert_switch").checked;
+                                   return isChecked;
+                               }
+
+                              function video_frame_check()
+                              {
+                                  $.post("http://127.0.0.1:8000/predict/", {alert: getAlertValue()}, function(data){
+                                      document.getElementById("concept1").innerHTML = data[0].label
+                                      document.getElementById("probability1").innerHTML = data[0].confidence
+                                      document.getElementById("concept2").innerHTML = data[1].label
+                                      document.getElementById("probability2").innerHTML = data[1].confidence
+                                      document.getElementById("concept3").innerHTML = data[2].label
+                                      document.getElementById("probability3").innerHTML = data[2].confidence
+                                      document.getElementById("concept4").innerHTML = data[3].label
+                                      document.getElementById("probability4").innerHTML = data[3].confidence
+                                      document.getElementById("concept5").innerHTML = data[4].label
+                                      document.getElementById("probability5").innerHTML = data[4].confidence
+                                });
+                              }
+                              setInterval("video_frame_check()",5000)
+                              </script>
+                            </div>
+                          </div>
+                        </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
