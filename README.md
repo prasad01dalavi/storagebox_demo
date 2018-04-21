@@ -2,7 +2,7 @@
 Detects Storage Box (cardboard, container) using Clarifai 
 
 
-Frontend:
+
  <p align="center">
   <img src="storagebox_detection_frontend.jpg" width=700 height=450>
  </p> 
