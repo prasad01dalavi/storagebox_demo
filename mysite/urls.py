@@ -23,6 +23,6 @@ from rekognition import views as view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^lmtech/$', view.PageLoad, name='page_load'),
+    url(r'^lmtech/$', view.page_load, name='page_load'),
     url(r'^predict/$', view.PredictImageObject.as_view()),
 ]

@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',                # This is used for api service
 ]
 
-REST_FRAMEWORK = {                   # Required for Authentication while data exchange between django and angular 2
+REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
     ),
@@ -133,6 +133,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static")
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
