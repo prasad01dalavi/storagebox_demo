@@ -4,7 +4,7 @@ Detects Storage Box (cardboard, container) using Clarifai
 
 Frontend:
  <p align="center">
-  <img src="storagebox_frontend.jpg" width=800 height=400>
+  <img src="storagebox_detection_frontend.jpg" width=800 height=400>
  </p> 
  
 
