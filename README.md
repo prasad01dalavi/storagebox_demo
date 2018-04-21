@@ -2,6 +2,12 @@
 Detects Storage Box (cardboard, container) using Clarifai 
 
 
+Frontend:
+ <p align="center">
+  <img src="storagebox_frontend.jpg" width=800 height=400>
+ </p> 
+ 
+
 ## Installations and Setup:
 ```bash
 pip install clarifai===2.1.0
